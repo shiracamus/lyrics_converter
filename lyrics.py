@@ -3,7 +3,7 @@
 #
 # Lyrics converter
 #
-# version: 2017.4.16
+# version: 2017.4.16.2
 # author: @shiracamus
 # github: https://github.com/shiracamus/lyrics_converter
 #
@@ -72,7 +72,6 @@ class LRC:
             f.write(text)
             f.write(os.linesep)
         self.exists = True
-        return True
 
 
 def show_filename(lyrics):
@@ -80,7 +79,9 @@ def show_filename(lyrics):
 
 
 def show_lyrics(lyrics):
-    print('Lyrics in "%s":' % lyrics.path)
+    print('=' * 30)
+    print(lyrics.path)
+    print('-' * 30)
     print(lyrics.text)
     print()
 
