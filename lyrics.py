@@ -3,7 +3,7 @@
 #
 # Lyrics converter
 #
-# version: 2017.4.16.2
+# version: 2017.4.16.3
 # author: @shiracamus
 # github: https://github.com/shiracamus/lyrics_converter
 #
@@ -24,7 +24,7 @@ def read_lyrics_in_mp3(path):
     try:
         tags = ID3(path)
         if 'USLT::eng' in tags:
-            return tags['USLT::eng'].text.strip()
+            return tags['USLT::eng'].text
     except ID3NoHeaderError:
         pass
     return None
@@ -34,7 +34,7 @@ def read_lyrics_in_mp4(path):
     try:
         tags = MP4(path).tags
         if '\xa9lyr' in tags:
-            return tags['\xa9lyr'][0].strip()
+            return tags['\xa9lyr'][0]
     except MP4StreamInfoError:
         pass
     return None
@@ -70,7 +70,6 @@ class LRC:
     def save(self, text):
         with open(self.path, 'w') as f:
             f.write(text)
-            f.write(os.linesep)
         self.exists = True
 
 
