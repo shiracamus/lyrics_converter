@@ -1,5 +1,6 @@
 # lyrics converter
 Show lyrics in from MP3/MP4 files.
+
 Copy lyrics from MP3/MP4 files to LRC files.
 
 # command
