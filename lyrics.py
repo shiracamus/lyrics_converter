@@ -3,7 +3,7 @@
 #
 # Lyrics converter
 #
-# version: 2017.4.16.3
+# version: 2017.4.17
 # author: @shiracamus
 # github: https://github.com/shiracamus/lyrics_converter
 #
@@ -85,17 +85,17 @@ def show_lyrics(lyrics):
     print()
 
 
-def save_lrc(lyrics, args):
+def save_lrc(lyrics, replace=False):
     lrc = LRC(lyrics.path_base + LRC.ext)
-    if args.replace or not lrc.exists:
+    if not lrc.exists or replace:
         lrc.save(lyrics.text)
         print('Saved "%s"' % lrc.path)
     else:
         print('Already exists "%s"' % lrc.path)
 
 
-def pathes(args):
-    for file_or_directory in args:
+def pathes(file_or_directories):
+    for file_or_directory in file_or_directories:
         if os.path.isfile(file_or_directory):
             yield file_or_directory
         elif os.path.isdir(file_or_directory):
@@ -132,7 +132,7 @@ def main(args):
         if args.show:
             show_lyrics(lyrics)
         if args.create or args.replace:
-            save_lrc(lyrics, args)
+            save_lrc(lyrics, replace=args.replace)
 
 if __name__ == '__main__':
     main(parse_args())
