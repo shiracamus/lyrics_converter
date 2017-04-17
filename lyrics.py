@@ -3,7 +3,7 @@
 #
 # Lyrics converter
 #
-# version: 2017.4.17
+# version: 2017.4.17.2
 # author: @shiracamus
 # github: https://github.com/shiracamus/lyrics_converter
 #
@@ -23,8 +23,9 @@ from mutagen.mp4 import MP4, MP4StreamInfoError
 def read_lyrics_in_mp3(path):
     try:
         tags = ID3(path)
-        if 'USLT::eng' in tags:
-            return tags['USLT::eng'].text
+        for key in tags:
+            if key.startswith('USLT'):
+                return tags[key].text
     except ID3NoHeaderError:
         pass
     return None
